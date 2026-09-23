@@ -26,10 +26,6 @@ variables:
     AZURE_SERVICE_CONNECTION: '$(uat_azure_sub_serv_conn)'
     ENV_SHORT: 'u'
 
-  ${{ if eq(parameters.Env, 'prod') }}:
-    AZURE_SERVICE_CONNECTION: '$(prod_azure_sub_serv_conn)'
-    ENV_SHORT: 'p'
-
   poolImage: 'p4pa-${{ parameters.Env }}-linux-app'
   KEY_VAULT_NAME: 'p4pa-${{ variables.ENV_SHORT }}-payhub-kv'
 
@@ -48,7 +44,7 @@ stages:
             inputs:
               azureSubscription: $(AZURE_SERVICE_CONNECTION)
               keyVaultName: $(KEY_VAULT_NAME)
-              secretsFilter: 'db-mypay-login-username,db-mypay-login-password,db-host,db-piattaforma-unitaria-login-username,db-piattaforma-unitaria-login-password,db-analytics-login-username,db-analytics-login-password'
+              secretsFilter: 'db-migration-toolkit-write-login-username,db-migration-toolkit-write-login-password,db-host'
 
           - ${{ each db in parameters.dbs }}:
             - task: Bash@3
@@ -56,18 +52,8 @@ stages:
               inputs:
                 targetType: 'inline'
                 script: |
-                  if [ ${{db}} = "payhub" ];
-                  then
-                    echo "##vso[task.setvariable variable=DB_USERNAME;issecret=true]$(db-piattaforma-unitaria-login-username)"
-                    echo "##vso[task.setvariable variable=DB_PASSWORD;issecret=true]$(db-piattaforma-unitaria-login-password)"
-                  elif [ ${{db}} = "analytics" ];
-                  then
-                    echo "##vso[task.setvariable variable=DB_USERNAME;issecret=true]$(db-analytics-login-username)"
-                    echo "##vso[task.setvariable variable=DB_PASSWORD;issecret=true]$(db-analytics-login-password)"
-                  else
-                    echo "##vso[task.setvariable variable=DB_USERNAME;issecret=true]$(db-mypay-login-username)"
-                    echo "##vso[task.setvariable variable=DB_PASSWORD;issecret=true]$(db-mypay-login-password)"
-                  fi
+                  echo "##vso[task.setvariable variable=DB_USERNAME;issecret=true]$(db-migration-toolkit-write-login-username)"
+                  echo "##vso[task.setvariable variable=DB_PASSWORD;issecret=true]$(db-migration-toolkit-write-login-password)"
             - template: templates\db-update.yml
               parameters:
                 dbName: ${{ db }}
