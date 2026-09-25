@@ -10,6 +10,22 @@
                  splitStatements="false" stripComments="false"
                  path="migrations/0001-create_schema.sql"
         />
+        <sqlFile dbms="postgresql" encoding="UTF-8" endDelimiter=";" relativeToChangelogFile="true"
+                 splitStatements="false" stripComments="false"
+                 path="migrations/0002-create_table_migration_execution.sql"
+        />
+        <sqlFile dbms="postgresql" encoding="UTF-8" endDelimiter=";" relativeToChangelogFile="true"
+                 splitStatements="false" stripComments="false"
+                 path="migrations/0003-create_table_migration_file_execution.sql"
+        />
+        <sqlFile dbms="postgresql" encoding="UTF-8" endDelimiter=";" relativeToChangelogFile="true"
+                 splitStatements="false" stripComments="false"
+                 path="migrations/0004-create_table_migration_file_execution_detail.sql"
+        />
+        <sqlFile dbms="postgresql" encoding="UTF-8" endDelimiter=";" relativeToChangelogFile="true"
+                 splitStatements="false" stripComments="false"
+                 path="migrations/0005-create_table_migration_dag_dependency.sql"
+        />
     </changeSet>
 
 </databaseChangeLog>
