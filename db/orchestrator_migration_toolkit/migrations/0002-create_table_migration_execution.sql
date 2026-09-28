@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS migration_execution (
     updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
-CREATE INDEX IF NOT EXISTS idx_migration_execution_org_status ON migration_execution(org_ipa, status);
-CREATE INDEX IF NOT EXISTS idx_migration_execution_cycle_number ON migration_execution(org_ipa, cycle_number DESC);
+CREATE INDEX IF NOT EXISTS idx_migration_execution_org_status ON migration_execution(broker_ipa_code, status);
+CREATE INDEX IF NOT EXISTS idx_migration_execution_cycle_number ON migration_execution(broker_ipa_code, cycle_number DESC);
 
 -- final commit
 COMMIT;
