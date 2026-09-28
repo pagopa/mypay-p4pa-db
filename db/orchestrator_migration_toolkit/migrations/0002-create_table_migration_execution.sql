@@ -18,8 +18,7 @@ CREATE TABLE IF NOT EXISTS migration_execution (
     error_code VARCHAR(50),
     error_msg TEXT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
-    updated_at TIMESTAMP NOT NULL DEFAULT now(),
-    CONSTRAINT migration_execution_org_fk FOREIGN KEY (org_ipa) REFERENCES mygov_ente(cod_ipa_ente)
+    updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS idx_migration_execution_org_status ON migration_execution(org_ipa, status);
