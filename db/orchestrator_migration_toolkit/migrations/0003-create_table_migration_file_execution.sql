@@ -5,7 +5,7 @@ BEGIN;
 
 CREATE TABLE IF NOT EXISTS migration_file_execution (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    migration_id UUID NOT NULL REFERENCES migration_execution(id) ON DELETE CASCADE,
+    migration_id UUID NOT NULL,
     file_type VARCHAR(50)  NOT NULL,
     status VARCHAR(20)  NOT NULL,
     extractor_id VARCHAR(100),
