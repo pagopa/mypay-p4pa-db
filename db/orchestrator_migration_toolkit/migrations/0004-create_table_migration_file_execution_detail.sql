@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS migration_file_execution_detail (
     CONSTRAINT file_exec_migration_fk FOREIGN KEY (migration_file_execution_id) REFERENCES migration_file_execution (id) ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_migration_file_execution_detail_execution_id ON migration_file_execution(migration_file_execution_id);
+CREATE INDEX IF NOT EXISTS idx_migration_file_execution_detail_execution_id ON migration_file_execution_detail(migration_file_execution_id);
 
 -- final commit
 COMMIT;
