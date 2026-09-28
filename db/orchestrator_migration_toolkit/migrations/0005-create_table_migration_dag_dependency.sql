@@ -3,7 +3,7 @@ BEGIN;
 
 ------------------- business logic -------------------
 
-CREATE TABLE IF NOT EXISTS migration_dag_dependency (
+CREATE TABLE IF NOT EXISTS orchestrator.migration_dag_dependency (
     id SERIAL PRIMARY KEY,
     file_type VARCHAR(50) NOT NULL,
     depends_on VARCHAR(50) NOT NULL,

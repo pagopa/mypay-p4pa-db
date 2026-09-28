@@ -3,7 +3,7 @@ BEGIN;
 
 ------------------- business logic -------------------
 
-CREATE TABLE IF NOT EXISTS migration_file_execution (
+CREATE TABLE IF NOT EXISTS orchestrator.migration_file_execution (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     migration_id UUID NOT NULL,
     file_type VARCHAR(50)  NOT NULL,
@@ -22,11 +22,11 @@ CREATE TABLE IF NOT EXISTS migration_file_execution (
     upload_completed_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
     updated_at TIMESTAMP NOT NULL DEFAULT now(),
-    CONSTRAINT file_exec_migration_fk FOREIGN KEY (migration_id) REFERENCES migration_execution(id) ON DELETE CASCADE,
+    CONSTRAINT file_exec_migration_fk FOREIGN KEY (migration_id) REFERENCES orchestrator.migration_execution(id) ON DELETE CASCADE,
     CONSTRAINT file_exec_unique UNIQUE (migration_id, file_type)
 );
 
-CREATE INDEX IF NOT EXISTS idx_migration_file_exec_status ON migration_file_execution(migration_id, status);
+CREATE INDEX IF NOT EXISTS idx_migration_file_exec_status ON orchestrator.migration_file_execution(migration_id, status);
 
 -- final commit
 COMMIT;
