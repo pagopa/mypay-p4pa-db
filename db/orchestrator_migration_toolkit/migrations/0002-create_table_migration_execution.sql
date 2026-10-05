@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_execution (
     ipaCodes VARCHAR(500) NOT NULL,
     cycle_mode VARCHAR(20) NOT NULL,
     parent_execution_id UUID,
+    logical_keys text COLLATE pg_catalog."default",
+    file_types text COLLATE pg_catalog."default" NOT NULL,
     date_from DATE,
     date_to DATE,
     since_date TIMESTAMP,
@@ -19,8 +21,6 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_execution (
     error_msg TEXT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
     updated_at TIMESTAMP NOT NULL DEFAULT now() ,
-    logical_keys text COLLATE pg_catalog."default",
-    file_types text COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT migration_execution_pkey PRIMARY KEY (id),
     CONSTRAINT migration_execution_parent_execution_id_fkey FOREIGN KEY (parent_execution_id)
     REFERENCES orchestrator.migration_execution (id) MATCH SIMPLE
