@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_execution (
     CONSTRAINT migration_execution_parent_execution_id_fkey FOREIGN KEY (parent_execution_id)
     REFERENCES orchestrator.migration_execution (id) MATCH SIMPLE
                                                     ON UPDATE NO ACTION
-                                                   ON DELETE NO ACTION
+                                                    ON DELETE NO ACTION
 
 );
 

@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_dag_dependency (
 );
 
 
-
 INSERT INTO orchestrator.migration_dag_dependency(id,file_type,depends_on,label, max_executions) VALUES
 (1 ,'ROOT','ROOT','ROOT',0),
 (2 ,'ORGANIZATIONS','ROOT','ORGANIZATIONS',1),
