@@ -4,13 +4,15 @@ BEGIN;
 ------------------- business logic -------------------
 
 CREATE TABLE IF NOT EXISTS orchestrator.migration_execution (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id UUID DEFAULT gen_random_uuid(),
     broker_ipa_code VARCHAR(50) NOT NULL,
     status VARCHAR(20) NOT NULL,
     cycle_number INT NOT NULL,
     ipaCodes VARCHAR(500) NOT NULL,
     cycle_mode VARCHAR(20) NOT NULL,
-    parent_execution_id UUID REFERENCES orchestrator.migration_execution(id),
+    parent_execution_id UUID,
+    logical_keys text COLLATE pg_catalog."default",
+    file_types text COLLATE pg_catalog."default" NOT NULL,
     date_from DATE,
     date_to DATE,
     since_date TIMESTAMP,
@@ -18,7 +20,13 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_execution (
     error_code VARCHAR(50),
     error_msg TEXT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
-    updated_at TIMESTAMP NOT NULL DEFAULT now()
+    updated_at TIMESTAMP NOT NULL DEFAULT now() ,
+    CONSTRAINT migration_execution_pkey PRIMARY KEY (id),
+    CONSTRAINT migration_execution_parent_execution_id_fkey FOREIGN KEY (parent_execution_id)
+    REFERENCES orchestrator.migration_execution (id) MATCH SIMPLE
+                                                    ON UPDATE NO ACTION
+                                                    ON DELETE NO ACTION
+
 );
 
 CREATE INDEX IF NOT EXISTS idx_migration_execution_org_status ON orchestrator.migration_execution(broker_ipa_code, status);
