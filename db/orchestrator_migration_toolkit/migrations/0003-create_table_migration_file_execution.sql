@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_file_execution (
     upload_completed_at TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
     updated_at TIMESTAMP NOT NULL DEFAULT now(),
+    update_trace_id text DEFAULT '-'::text NOT NULL,
+
     CONSTRAINT file_exec_migration_fk FOREIGN KEY (migration_id) REFERENCES orchestrator.migration_execution(id) ON DELETE CASCADE,
     CONSTRAINT file_exec_unique UNIQUE (migration_id, file_type)
 );
