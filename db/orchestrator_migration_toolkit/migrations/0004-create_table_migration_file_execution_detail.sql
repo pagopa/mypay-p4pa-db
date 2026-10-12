@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_file_execution_detail (
     num_correctly_imported_rows INT4 NULL,
     created_at TIMESTAMP NOT NULL DEFAULT now(),
     updated_at TIMESTAMP NOT NULL DEFAULT now(),
+	update_trace_id text DEFAULT '-'::text NOT NULL,
+
     CONSTRAINT file_exec_migration_fk FOREIGN KEY (migration_file_execution_id) REFERENCES orchestrator.migration_file_execution(id) ON DELETE CASCADE
 );
 
