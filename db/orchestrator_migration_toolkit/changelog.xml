@@ -22,10 +22,6 @@
                  splitStatements="false" stripComments="false"
                  path="migrations/0004-create_table_migration_file_execution_detail.sql"
         />
-        <sqlFile dbms="postgresql" encoding="UTF-8" endDelimiter=";" relativeToChangelogFile="true"
-                 splitStatements="false" stripComments="false"
-                 path="migrations/0005-create_table_migration_dag_dependency.sql"
-        />
     </changeSet>
 
 </databaseChangeLog>
