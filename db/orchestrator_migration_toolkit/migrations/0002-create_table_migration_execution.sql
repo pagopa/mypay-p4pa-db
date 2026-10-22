@@ -5,7 +5,6 @@ BEGIN;
 
 CREATE TABLE IF NOT EXISTS orchestrator.migration_execution (
     id UUID DEFAULT gen_random_uuid(),
-    broker_ipa_code VARCHAR(50) NOT NULL,
     status VARCHAR(20) NOT NULL,
     file_type_count_completed INT NOT NULL,
     ipaCodes VARCHAR(500) NOT NULL,
