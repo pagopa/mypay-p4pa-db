@@ -10,18 +10,21 @@ CREATE TABLE IF NOT EXISTS orchestrator.migration_file_execution_detail (
     file_name VARCHAR(256) NOT NULL,
     upload_detail_id INT8,
     file_size INT8 NOT NULL,
-    error_description TEXT NULL,
-    discard_file_name TEXT NULL,
-    num_total_rows INT4 NULL,
-    num_correctly_imported_rows INT4 NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT now(),
-    updated_at TIMESTAMP NOT NULL DEFAULT now(),
-	update_trace_id text DEFAULT '-'::text NOT NULL,
+    error_description TEXT,
+    discard_file_name TEXT,
+    num_total_rows INT4,
+    num_correctly_imported_rows INT4,
+    creation_date TIMESTAMP NOT NULL DEFAULT now(),
+    update_date TIMESTAMP NOT NULL DEFAULT now(),
+    update_trace_id TEXT NOT NULL DEFAULT '-',
 
-    CONSTRAINT file_exec_migration_fk FOREIGN KEY (migration_file_execution_id) REFERENCES orchestrator.migration_file_execution(id) ON DELETE CASCADE
+    CONSTRAINT file_exec_detail_file_exec_fk FOREIGN KEY (migration_file_execution_id)
+        REFERENCES orchestrator.migration_file_execution(id)
+            ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_migration_file_execution_detail_execution_id ON orchestrator.migration_file_execution_detail(migration_file_execution_id);
+CREATE INDEX IF NOT EXISTS idx_migration_file_execution_detail_execution_id
+    ON orchestrator.migration_file_execution_detail(migration_file_execution_id);
 
 -- final commit
 COMMIT;
